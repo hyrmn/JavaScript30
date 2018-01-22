@@ -18,28 +18,68 @@
     }
 
     // Regular
+    console.log('Hello')
 
     // Interpolated
+    console.log('Logging %s', 'hello')
+
+    let msg = "message"
+    console.log(`Logging ${msg}`)
 
     // Styled
+    console.log('%cPay attention', 'font-size:20px; background:red')
 
     // warning!
+    console.warn('Stuff is going poorly')
 
     // Error :|
+    console.error('Stuff is going very poorly')    
+    console.error('%cStuff is going very poorly', 'font-size:20px')    
 
     // Info
+    console.info('Stuff is simply happening')
 
     // Testing
+    console.assert(1 === 2, 'Math still works in this universe')
 
     // clearing
+    //console.clear()
 
     // Viewing DOM Elements
+    const p = document.querySelector('p')
+
+    console.log(p)
+    console.dir(p)
+
+    // Tables!
+
+    console.table(dogs)
 
     // Grouping together
+    dogs.forEach(dog => {
+      console.group(`${dog.name}`)
+      console.log(`This is ${dog.name}`)
+      console.log(`${dog.name} is ${dog.age} years old`)
+      console.log(`${dog.name} is ${dog.age *7} dog years old`)
+      console.groupEnd(`${dog.name}`)
+    })
 
     // counting
+    console.count('apples')
+    console.count('apples')
+    console.count('oranges')
+    console.count('apples')
+    console.count('apples')
+    console.count('oranges')
 
     // timing
+    console.time('Fetching profile')
+    fetch('https://api.github.com/users/hyrmn')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('Fetching profile')
+        console.log(data)
+      })
 
   </script>
 </body>
