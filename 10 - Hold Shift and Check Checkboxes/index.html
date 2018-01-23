@@ -98,7 +98,28 @@
     </div>
   </div>
 
-<script>
-</script>
+  <script>
+    let lastClicked = null
+
+    const checkboxes = Array(...document.querySelectorAll('input[type="checkbox"]'))
+
+    function handleSelect(e) {
+      if(e.shiftKey && this.checked){
+        end = checkboxes.indexOf(this)
+        start = checkboxes.indexOf(lastClicked) 
+        if (start < 0) {
+          start = end
+        }
+        checkboxes.slice(lesserOf(start,end), greaterOf(start,end)).forEach(checkbox => checkbox.checked = true)
+      }
+
+      lastClicked = this
+    }
+
+    function greaterOf(a, b) { return a > b ? a : b }
+    function lesserOf(a, b) { return a < b ? a : b }
+
+    checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleSelect))
+  </script>
 </body>
 </html>
