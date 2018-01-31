@@ -177,11 +177,37 @@
     <li data-time="1:56">
       Video 57
     </li>
-    <li data-time="4:04">
+    <li data-time="3:34:06">
       Video 58
     </li>
   </ul>
 <script>
+  function pad(n) {
+      return (n < 10) ? ("0" + n) : n;
+  }
+
+  function getSeconds(runtime) {
+    const timeParts = runtime.split(':')
+    const hours = timeParts.length > 2 ? parseFloat(timeParts[0]) : 0
+    const mins = parseFloat(timeParts[timeParts.length - 2])
+    const secs = parseFloat(timeParts[timeParts.length - 1])
+
+    return (hours * 60 * 60) + (mins * 60) + (secs)
+  }
+
+  const timestamps = [...document.querySelectorAll('[data-time]')]
+  const seconds = timestamps
+          .map(v => v.dataset.time)
+          .map(runtime => getSeconds(runtime))
+          .reduce((total, runtime) => total + runtime)
+
+  let totS = seconds
+  const totH = Math.floor(seconds / 3600)
+  totS = seconds % 3600
+  const totM = Math.floor(totS / 60)
+  totS = seconds % 60 
+
+  console.log(`${pad(totH)}:${pad(totM)}:${pad(totS)}`)
 </script>
 </body>
 </html>
