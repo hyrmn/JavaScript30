@@ -12,7 +12,7 @@
         <li><a href="">Home</a></li>
         <li><a href="">Order Status</a></li>
         <li><a href="">Tweets</a></li>
-        <li><a href="">Read Our History</a></li>
+        <li><a href="httpgoogle.com">Read Our History</a></li>
         <li><a href="">Contact Us</a></li>
       </ul>
     </nav>
@@ -27,6 +27,28 @@
 
   <script>
     // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    const triggers = document.querySelectorAll('a')
+    const highlight = document.createElement('span')
+    highlight.classList.add('highlight')
+    document.body.appendChild(highlight)
+
+    function highlightLink() {
+      const linkCoords = this.getBoundingClientRect()
+
+      const highlightCoords = {
+        width: linkCoords.width,
+        height: linkCoords.height,
+        left: linkCoords.left + window.scrollX,
+        top: linkCoords.top + window.scrollY,
+      }
+
+      highlight.style.width = `${highlightCoords.width}px`
+      highlight.style.height = `${highlightCoords.height}px`
+      highlight.style.transform = `translate(${highlightCoords.left}px, ${highlightCoords.top}px)`
+    }
+
+    triggers.forEach(link => link.addEventListener('mouseenter', highlightLink))
+    triggers.forEach(link => link.addEventListener('focus', highlightLink))
   </script>
 </body>
 </html>
